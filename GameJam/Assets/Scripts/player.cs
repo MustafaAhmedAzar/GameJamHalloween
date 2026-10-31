@@ -10,7 +10,7 @@ public class player : MonoBehaviour
     // Inner edges of the rock walls in world X; the player's centre stays inside these
     public float leftBorder = -3.5f;
     public float rightBorder = 3.5f;
-    public int lives = 5;
+    public int lives = 3;
     // Seconds of blinking after a hit, during which obstacles can't hurt again
     public float invincibleTime = 1f;
     // How fast the player moves while poisoned (0.5 = half speed)
@@ -29,6 +29,9 @@ public class player : MonoBehaviour
     private float slowTimer;
     private float invincibleTimer;
     private int crystals;
+    private float Timer;
+    public float levelTime = 240f;
+    private int nextLevel = 1;
 
     private float SpeedFactor => slowTimer > 0f ? slowMultiplier : 1f;
 
@@ -47,6 +50,13 @@ public class player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Timer += Time.deltaTime;
+        if (Timer >= levelTime)
+        {
+            SceneManager.LoadScene(nextLevel);
+            nextLevel++;
+            fallSpeed++;
+        }
         slowTimer -= Time.deltaTime;
         invincibleTimer -= Time.deltaTime;
         animator.speed = SpeedFactor;
