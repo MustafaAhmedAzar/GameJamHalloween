@@ -16,8 +16,12 @@ public class player : MonoBehaviour
     // How fast the player moves while poisoned (0.5 = half speed)
     public float slowMultiplier = 0.5f;
     public Animator animator;
+    // Played every time the player switches lanes
+    public AudioClip moveSound;
+    [Range(0f, 1f)] public float moveSoundVolume = 1f;
     private Rigidbody2D rb;
     private SpriteRenderer sr;
+    private AudioSource audioSource;
     private float targetX;
     private float currentX;
     private Tween moveTween;
@@ -33,6 +37,8 @@ public class player : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         sr = GetComponent<SpriteRenderer>();
+        audioSource = gameObject.AddComponent<AudioSource>();
+        audioSource.playOnAwake = false;
         rb.gravityScale = 0f;
         rb.freezeRotation = true;
         targetX = currentX = rb.position.x;
@@ -72,6 +78,7 @@ public class player : MonoBehaviour
         moveTween?.Kill();
         // Tween only the X value; FixedUpdate applies it to the Rigidbody
         moveTween = DOTween.To(() => currentX, v => currentX = v, targetX, 0.5f / SpeedFactor);
+        audioSource.PlayOneShot(moveSound, moveSoundVolume);
     }
 
     // Called by obstacles; slowDuration > 0 also poisons the player for that long

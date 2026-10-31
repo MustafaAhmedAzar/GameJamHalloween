@@ -416,6 +416,8 @@ MonoBehaviour:
   invincibleTime: 1
   slowMultiplier: 0.5
   animator: {fileID: 1333011462}
+  moveSound: {fileID: 8300000, guid: 27360319cb53f954ab07ea724e79dff6, type: 3}
+  moveSoundVolume: 1
 --- !u!50 &1333011459
 Rigidbody2D:
   serializedVersion: 5
@@ -862,6 +864,52 @@ MonoBehaviour:
   crystalChance: 0.4
   spawnDistance: 8
   despawnDistance: 8
+--- !u!1 &800000041
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 800000042}
+  - component: {fileID: 800000043}
+  m_Layer: 0
+  m_Name: Music
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &800000042
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 800000041}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &800000043
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 800000041}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6a8c0e2b4d64e5f9a1b3c5d7e9f0a47, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: Assembly-CSharp::MusicPlayer
+  music: {fileID: 8300000, guid: a73b6d454d24d664aad2537b87f43644, type: 3}
+  volume: 0.5
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -871,3 +919,4 @@ SceneRoots:
   - {fileID: 519420032}
   - {fileID: 800000002}
   - {fileID: 800000032}
+  - {fileID: 800000042}
