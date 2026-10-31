@@ -260,6 +260,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Obstacle
   slowDuration: 1
+  showVignette: 1
 --- !u!95 &-36449456835383277
 Animator:
   serializedVersion: 7

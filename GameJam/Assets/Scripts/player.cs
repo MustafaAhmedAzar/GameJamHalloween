@@ -1,10 +1,15 @@
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Rendering;
+using UnityEngine.Rendering.Universal;
 using UnityEngine.SceneManagement;
 
 public class player : MonoBehaviour
 {
+    public Volume volume;
+    public float vignetteIntensity = 0.45f;
+    private Vignette vignette;
     public float speed = 2.8f;
     public float fallSpeed = 3f;
     // Inner edges of the rock walls in world X; the player's centre stays inside these
@@ -45,6 +50,8 @@ public class player : MonoBehaviour
         rb.gravityScale = 0f;
         rb.freezeRotation = true;
         targetX = currentX = rb.position.x;
+        volume.profile.TryGet(out vignette);
+        vignette.intensity.value = 0f;
     }
 
     // Update is called once per frame
@@ -59,6 +66,10 @@ public class player : MonoBehaviour
         }
         slowTimer -= Time.deltaTime;
         invincibleTimer -= Time.deltaTime;
+        if (invincibleTimer <= 0f && vignette.intensity.value > 0f)
+        {
+            vignette.intensity.value = 0f;
+        }
         animator.speed = SpeedFactor;
 
         if (Keyboard.current.dKey.wasPressedThisFrame)
@@ -92,7 +103,7 @@ public class player : MonoBehaviour
     }
 
     // Called by obstacles; slowDuration > 0 also poisons the player for that long
-    public void TakeHit(float slowDuration)
+    public void TakeHit(float slowDuration, bool showVignette = false)
     {
         if (invincibleTimer > 0f) return;
 
@@ -105,6 +116,7 @@ public class player : MonoBehaviour
         }
 
         invincibleTimer = invincibleTime;
+        if (showVignette) vignette.intensity.value = vignetteIntensity;
         slowTimer = Mathf.Max(slowTimer, slowDuration);
 
         blinkTween?.Kill();
