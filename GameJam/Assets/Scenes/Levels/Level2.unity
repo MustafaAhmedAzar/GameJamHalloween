@@ -270,7 +270,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CameraFollowY
   target: {fileID: 1575145003}
-  offsetY: 0
+  offsetY: -2
 --- !u!1 &225502378
 GameObject:
   m_ObjectHideFlags: 0
@@ -306,9 +306,9 @@ MonoBehaviour:
   - {fileID: 4371554300459665505, guid: 71b74b07cadc22641a64eb0e081c289d, type: 3}
   - {fileID: 7731292867070155342, guid: 99eba187520b8a0458ef6e89d2188a85, type: 3}
   crystalPrefab: {fileID: 7079277563639103625, guid: c19fc7c2525dfcb4a88bbf67cae52c34, type: 3}
-  rowGap: 8
+  rowGap: 10
   crystalChance: 0.4
-  spawnDistance: 8
+  spawnDistance: 10
   despawnDistance: 8
   flyTrapChance: 0.6
   flyTrapLeftX: -6.73
@@ -811,7 +811,7 @@ MonoBehaviour:
   volume: {fileID: 1575145004}
   vignetteIntensity: 0.45
   speed: 3.3
-  fallSpeed: 3
+  fallSpeed: 6
   leftBorder: -4.74
   rightBorder: 3.67
   lives: 5
@@ -820,7 +820,7 @@ MonoBehaviour:
   animator: {fileID: 1575144999}
   moveSound: {fileID: 8300000, guid: 27360319cb53f954ab07ea724e79dff6, type: 3}
   moveSoundVolume: 1
-  levelTime: 240
+  pointReq: 10
 --- !u!50 &1575145001
 Rigidbody2D:
   serializedVersion: 5

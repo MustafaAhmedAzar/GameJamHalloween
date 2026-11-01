@@ -34,8 +34,8 @@ public class player : MonoBehaviour
     private float slowTimer;
     private float invincibleTimer;
     private int crystals;
-    private float Timer;
-    public float levelTime = 240f;
+    public int pointReq = 15;
+    //public float levelTime = 240f;
     private int nextLevel = 1;
 
     private float SpeedFactor => slowTimer > 0f ? slowMultiplier : 1f;
@@ -57,12 +57,14 @@ public class player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Timer += Time.deltaTime;
-        if (Timer >= levelTime && nextLevel <= 3)
+        //Timer += Time.deltaTime;
+        if (crystals == pointReq && nextLevel <= 3)
         {
             SceneManager.LoadScene(nextLevel);
             nextLevel++;
-            fallSpeed++;
+            crystals = 0;
+            //fallSpeed+= 5
+            //Timer = 0f;
         }
         slowTimer -= Time.deltaTime;
         invincibleTimer -= Time.deltaTime;

@@ -757,7 +757,7 @@ MonoBehaviour:
   animator: {fileID: 1333011462}
   moveSound: {fileID: 8300000, guid: 27360319cb53f954ab07ea724e79dff6, type: 3}
   moveSoundVolume: 1
-  levelTime: 240
+  pointReq: 6
 --- !u!50 &1333011459
 Rigidbody2D:
   serializedVersion: 5
