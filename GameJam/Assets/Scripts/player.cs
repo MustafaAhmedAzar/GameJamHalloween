@@ -58,7 +58,7 @@ public class player : MonoBehaviour
     void Update()
     {
         Timer += Time.deltaTime;
-        if (Timer >= levelTime)
+        if (Timer >= levelTime && nextLevel <= 3)
         {
             SceneManager.LoadScene(nextLevel);
             nextLevel++;

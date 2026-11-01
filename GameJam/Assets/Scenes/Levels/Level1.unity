@@ -660,6 +660,11 @@ MonoBehaviour:
   crystalChance: 0.4
   spawnDistance: 8
   despawnDistance: 8
+  flyTrapChance: 0.6
+  flyTrapLeftX: -6.73
+  flyTrapRightX: 4.930132
+  flyTrapZ: -1
+  flyTrapYOffset: 0
 --- !u!1 &800000041
 GameObject:
   m_ObjectHideFlags: 0
@@ -720,6 +725,7 @@ GameObject:
   - component: {fileID: 1333011458}
   - component: {fileID: 1333011462}
   - component: {fileID: 1333011463}
+  - component: {fileID: 1333011464}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -739,6 +745,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41bf629ba2d55d449a3553991efea3d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Movement
+  volume: {fileID: 1333011464}
+  vignetteIntensity: 0.45
   speed: 2.8
   fallSpeed: 3
   leftBorder: -3.5
@@ -911,6 +919,23 @@ CapsuleCollider2D:
   m_Offset: {x: -0.014076449, y: -0.15605406}
   m_Size: {x: 1.8222778, y: 8.394625}
   m_Direction: 0
+--- !u!114 &1333011464
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1333011457}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 172515602e62fb746b5d573b38a5fe58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.RenderPipelines.Core.Runtime::UnityEngine.Rendering.Volume
+  m_IsGlobal: 1
+  priority: 0
+  blendDistance: 0
+  weight: 1
+  sharedProfile: {fileID: 11400000, guid: eedc365e56afd3a4b9b9929616093990, type: 2}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
