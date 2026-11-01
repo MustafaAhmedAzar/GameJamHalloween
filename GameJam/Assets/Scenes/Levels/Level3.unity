@@ -1359,6 +1359,7 @@ MonoBehaviour:
   moveSound: {fileID: 8300000, guid: 27360319cb53f954ab07ea724e79dff6, type: 3}
   moveSoundVolume: 1
   pointReq: 10
+  pauseIcon: {fileID: 750074005}
 --- !u!95 &1819843976
 Animator:
   serializedVersion: 7

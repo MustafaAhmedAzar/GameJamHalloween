@@ -1376,6 +1376,7 @@ MonoBehaviour:
   moveSound: {fileID: 8300000, guid: 27360319cb53f954ab07ea724e79dff6, type: 3}
   moveSoundVolume: 1
   pointReq: 10
+  pauseIcon: {fileID: 276445587}
 --- !u!50 &1575145001
 Rigidbody2D:
   serializedVersion: 5

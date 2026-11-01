@@ -42,12 +42,17 @@ public class player : MonoBehaviour
     private int nextLevel = 1;
     public GameObject pauseIcon;
     private bool paused;
+    private static bool gameStarted = false;
 
     private float SpeedFactor => slowTimer > 0f ? slowMultiplier : 1f;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        if (SceneManager.GetActiveScene().buildIndex != 4 && gameStarted == false) {
+            SceneManager.LoadScene(4);
+            gameStarted = true;
+        }
         rb = GetComponent<Rigidbody2D>();
         sr = GetComponent<SpriteRenderer>();
         audioSource = gameObject.AddComponent<AudioSource>();
@@ -71,7 +76,7 @@ public class player : MonoBehaviour
         }
         slowTimer -= Time.deltaTime;
         invincibleTimer -= Time.deltaTime;
-        if (invincibleTimer <= 0f && vignette.intensity.value > 0f)
+        if (!paused && invincibleTimer <= 0f && vignette.intensity.value > 0f)
         {
             vignette.intensity.value = 0f;
         }
@@ -87,11 +92,22 @@ public class player : MonoBehaviour
         }
         if (Keyboard.current.escapeKey.wasPressedThisFrame)
         {
-            paused = true;
-            pauseIcon.transform.DOMove(new Vector2(0, 0), 1f);
-            
-            //614 102
-            
+            if (paused == false)
+            {
+                paused = true;
+                pauseIcon.transform.DOLocalMove(new Vector2(166, -102), 1f).SetUpdate(true);
+                vignette.intensity.value = vignetteIntensity;
+                AudioListener.pause = true;
+                Time.timeScale = 0f;
+            }
+            else
+            {
+                paused = false;
+                pauseIcon.transform.DOLocalMove(new Vector2(614, 102), 1f).SetUpdate(true);
+                vignette.intensity.value = 0f;
+                AudioListener.pause = false;
+                Time.timeScale = 1f;
+            }
         }
     }
 
