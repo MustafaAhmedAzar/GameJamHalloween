@@ -1,12 +1,16 @@
 using DG.Tweening;
+using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class player : MonoBehaviour
 {
+    public TMP_Text counterDisp;
+    public GameObject[] Hearts;
     public Volume volume;
     public float vignetteIntensity = 0.45f;
     private Vignette vignette;
@@ -35,8 +39,9 @@ public class player : MonoBehaviour
     private float invincibleTimer;
     private int crystals;
     public int pointReq = 15;
-    //public float levelTime = 240f;
     private int nextLevel = 1;
+    public GameObject pauseIcon;
+    private bool paused;
 
     private float SpeedFactor => slowTimer > 0f ? slowMultiplier : 1f;
 
@@ -52,19 +57,17 @@ public class player : MonoBehaviour
         targetX = currentX = rb.position.x;
         volume.profile.TryGet(out vignette);
         vignette.intensity.value = 0f;
+        counterDisp.text = $"{crystals}/{pointReq}";
     }
 
     // Update is called once per frame
     void Update()
     {
-        //Timer += Time.deltaTime;
         if (crystals == pointReq && nextLevel <= 3)
         {
             SceneManager.LoadScene(nextLevel);
             nextLevel++;
             crystals = 0;
-            //fallSpeed+= 5
-            //Timer = 0f;
         }
         slowTimer -= Time.deltaTime;
         invincibleTimer -= Time.deltaTime;
@@ -81,6 +84,14 @@ public class player : MonoBehaviour
         if (Keyboard.current.aKey.wasPressedThisFrame)
         {
             MoveTo(targetX - speed);
+        }
+        if (Keyboard.current.escapeKey.wasPressedThisFrame)
+        {
+            paused = true;
+            pauseIcon.transform.DOMove(new Vector2(0, 0), 1f);
+            
+            //614 102
+            
         }
     }
 
@@ -110,6 +121,7 @@ public class player : MonoBehaviour
         if (invincibleTimer > 0f) return;
 
         lives--;
+        Destroy(Hearts[lives]);
         if (lives <= 0)
         {
             // Out of lives: restart the location from the beginning
@@ -130,19 +142,13 @@ public class player : MonoBehaviour
     public void AddCrystal()
     {
         crystals++;
+        counterDisp.text = $"{crystals}/{pointReq}";
     }
 
     void OnDestroy()
     {
         moveTween?.Kill();
         blinkTween?.Kill();
-    }
-
-    // Placeholder HUD until there's a proper UI
-    void OnGUI()
-    {
-        GUIStyle style = new GUIStyle(GUI.skin.label) { fontSize = 28 };
-        GUI.Label(new Rect(20, 20, 600, 40), $"Lives: {lives}    Crystals: {crystals}", style);
     }
 
     // Shows the borders in the Scene view so they're easy to tune
